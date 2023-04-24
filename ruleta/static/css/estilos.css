@@ -13,6 +13,11 @@
     position: relative;
     height:100vh;
   }
+
+  .h1registro{
+    color: rgb(45, 45, 45);
+    opacity: 0.9;
+  }
   
 div {
     text-align: center;
