@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static  'css/estilos.css' %}?1">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.min.css">
+    <title>Sorteo Descuento Ruleta Kosta Azul</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1>¡PRUEBA TU SUERTE!</h1>
+            </div>
+            <div class="col-12">
+                <canvas id="canvas" width="500" height="500"></canvas>
+                <button type="button" class="btn btn-danger" id='spin'>¡GIRAR RULETA!</button>
+            </div>
+            <div class="col-12">
+                <img src="{% static 'img/logo.png' %}" alt="logo" id="logo">
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+    <script>
+            var options = ["5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%"];
+
+            var startAngle = 0;
+            var arc = Math.PI / (options.length / 2);
+            var spinTimeout = null;
+
+            var spinArcStart = 10;
+            var spinTime = 0;
+            var spinTimeTotal = 0;
+
+            var ctx;
+            document.getElementById("spin").disabled = false;
+            document.getElementById("spin").addEventListener("click", spin);
+
+            function getColor(item, maxitem) {
+                const colorMap = new Map([
+                    [0, "#00bfff"],
+                    [1, "#192bc2"],
+                    [2, "#0000ff"],
+                    [3, "#0047ab"],
+                    [4, "#73c2fb"],
+                    [5, "#1e90ff"],
+                    [6, "#1034a6"],
+                    [7, "#89cff0"],
+                    [8, "#1560bd"],
+                    [9, "#0f52ba"],
+                ]);
+                return colorMap.get(item);
+            }
+                            /*function getColor(item, maxitem) {
+            var phase = 0;
+            var center = 128;
+            var width = 127;
+            var frequency = (Math.PI * 2) / maxitem;
+
+            red = Math.sin(frequency * item + 2 + phase) * width + center;
+            green = Math.sin(frequency * item + 0 + phase) * width + center;
+            blue = Math.sin(frequency * item + 4 + phase) * width + center;
+
+            return RGB2Color(red, green, blue);
+            }*/
+
+   /**         function drawRouletteWheel() {
+    var canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+        var outsideRadius = 230;
+        var textRadius = 160;
+        var insideRadius = 50;
+
+        ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, 500, 500);
+
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+
+        ctx.font = 'bold 25px Helvetica, Arial';
+
+        for (var i = 0; i < options.length; i++) {
+            var angle = startAngle + i * arc;
+            ctx.fillStyle = getColor(i, options.length);
+
+            ctx.beginPath();
+            ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
+            ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
+            ctx.stroke();
+            ctx.fill();
+
+            ctx.save();
+            ctx.shadowOffsetX = -1;
+            ctx.shadowOffsetY = -1;
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = "#27538C";
+            ctx.textBaseline = "middle";
+            ctx.translate(
+                250 + Math.cos(angle + arc / 2) * textRadius,
+                250 + Math.sin(angle + arc / 2) * textRadius
+            );
+            ctx.rotate(angle + arc / 2 + Math.PI / 2);
+            var text = options[i];
+            ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+            ctx.restore();
+        } 
+
+        // Set the center color
+        ctx.fillStyle = "#E49EF1"; // Replace "#FF0000" with the desired color code
+
+        // Draw the center circle
+        ctx.beginPath();
+        ctx.arc(250, 250, 40, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Draw arrow
+        ctx.fillStyle = "#27538C";
+        ctx.beginPath();
+        ctx.moveTo(250 - 4, 250 - (outsideRadius + 10));
+        ctx.lineTo(250 + 4, 250 - (outsideRadius + 10));
+        ctx.lineTo(250 + 4, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 + 9, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 + 0, 250 - (outsideRadius - 25));
+        ctx.lineTo(250 - 9, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 - 4, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 - 4, 250 - (outsideRadius + 10));
+        ctx.fill();
+    }
+}*/
+
+function drawRouletteWheel() {
+    var canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+        var outsideRadius = 230;
+        var textRadius = 160;
+        var insideRadius = 50;
+        
+        // Modificación: si el ancho de la pantalla es menor a 600 píxeles, se reduce el tamaño de la ruleta
+        if (window.innerWidth < 600) {
+            var scaleRatio = window.innerWidth / 1200;
+            outsideRadius *= 0.8;
+            textRadius *= 0.8;
+            insideRadius *= 0.8;
+        }
+
+        ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, 500, 500);
+
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 1;
+
+        ctx.font = 'bold 25px Helvetica, Arial';
+
+        for (var i = 0; i < options.length; i++) {
+            var angle = startAngle + i * arc;
+            ctx.fillStyle = getColor(i, options.length);
+
+            ctx.beginPath();
+            ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
+            ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
+            ctx.stroke();
+            ctx.fill();
+
+            ctx.save();
+            ctx.shadowOffsetX = -1;
+            ctx.shadowOffsetY = -1;
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = "#ffffff";
+            ctx.textBaseline = "middle";
+            ctx.translate(
+                250 + Math.cos(angle + arc / 2) * textRadius,
+                250 + Math.sin(angle + arc / 2) * textRadius
+            );
+            ctx.rotate(angle + arc / 2 + Math.PI / 2);
+            var text = options[i];
+            ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+            ctx.restore();
+        }
+
+        // Set the center color
+        ctx.fillStyle = "#00004d"; // Replace "#FF0000" with the desired color code
+
+        // Draw the center circle
+        ctx.beginPath();
+        ctx.arc(250, 250, 40, 0, 2 * Math.PI);
+        ctx.fill();
+
+        // Draw arrow
+        ctx.fillStyle = "#00004d";
+        ctx.beginPath();
+        ctx.moveTo(250 - 4, 250 - (outsideRadius + 10));
+        ctx.lineTo(250 + 4, 250 - (outsideRadius + 10));
+        ctx.lineTo(250 + 4, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 + 9, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 + 0, 250 - (outsideRadius - 25));
+        ctx.lineTo(250 - 9, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 - 4, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 - 4, 250 - (outsideRadius + 10));
+        ctx.fill();
+    }
+}
+
+            function spin() {
+            document.getElementById("spin").disabled = true;
+            spinAngleStart = Math.random() * 10 + 10;
+            spinTime = 0;
+            spinTimeTotal = 40 * 1000;
+            rotateWheel();
+            }
+
+            function rotateWheel() {
+            spinTime += 30;
+            var degrees = (startAngle * 180) / Math.PI + 90;
+            var arcd = (arc * 180) / Math.PI;
+            var index = Math.floor((360 - (degrees % 360)) / arcd);
+            if ((spinTime > 2500) & (options[index] == "{{cliente.porcentaje}}")) {
+                stopRotateWheel();
+                return;
+            }
+            var spinAngle =
+                spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+            startAngle += (spinAngle * Math.PI) / 180;
+            drawRouletteWheel();
+            spinTimeout = setTimeout("rotateWheel()", 30);
+            }
+
+            function stopRotateWheel() {
+            clearTimeout(spinTimeout);
+            var degrees = (startAngle * 180) / Math.PI + 90;
+            var arcd = (arc * 180) / Math.PI;
+            var index = Math.floor((360 - (degrees % 360)) / arcd);
+            ctx.save();
+            ctx.font = "bold 30px Helvetica, Arial";
+            ctx.fillStyle = "white"
+            var text = options[index];
+            ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
+            ctx.restore();
+            }
+
+            function easeOut(t, b, c, d) {
+            var ts = (t /= d) * t;
+            var tc = ts * t;
+            return b + c * (tc + -3 * ts + 3 * t);
+            }
+
+            drawRouletteWheel();
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.min.js"></script>
+    <script src="{% static 'js/script.js'%}?7"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"></script>
+</body>
+</html>

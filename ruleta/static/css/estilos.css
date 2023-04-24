@@ -1,0 +1,81 @@
+@font-face {
+    font-family: grobold;
+    src: url('GROBOLD.ttf');
+  }
+
+
+  body {
+    background-image: url("../img/fondo.jpg") ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    height:100vh;
+  }
+  
+div {
+    text-align: center;
+    align-items: center;
+}
+
+button {
+    position: relative;
+    text-align: center;
+    align-items: center;
+    font-family: grobold;
+    top: 10%;
+    left: -15em;
+}
+
+canvas {
+    position: relative;
+    left: 5em;
+    top: 10px;
+}
+
+h1 {
+    font-family: grobold;
+    position: relative;
+    font-size: 50px;
+    color: rgb(0, 10, 97);
+}
+
+#logo {
+    position: relative;
+    top: 2em;
+    width: 150px;
+}
+
+@media (min-width: 0px) and (max-width: 550px) { 
+   div {
+        position: relative;
+        text-align: center;
+        align-items: center;
+        top:5%;
+   }
+    button {
+        text-align: center;
+        align-items: center;
+        left: 0;
+        font-family: grobold;
+        top:20%;
+    }
+
+    canvas {
+        position: relative;
+        left: -4em;
+        top: 10px;
+    }
+
+    h1 {
+        align-items: center;
+        align-content: center;
+        text-align: center;
+        position: relative;
+        font-size: 35px;
+        top: 1%;
+        color: rgb(0, 10, 97);
+    }
+
+}
