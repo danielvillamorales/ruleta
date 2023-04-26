@@ -178,6 +178,13 @@ function drawRouletteWheel() {
             var text = options[index];
             ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
             ctx.restore();
+            setTimeout(async function() {
+        Swal.fire(
+            'Felicitaciones!',
+            'Tienes Un Descuento Del ' + text +' En Toda La Compra.',
+            'success'
+        );
+            }, 2000);
             }
 
             function easeOut(t, b, c, d) {
