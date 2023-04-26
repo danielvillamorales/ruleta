@@ -17,6 +17,7 @@
     <title>Sorteo Descuento Ruleta Kosta Azul</title>
 </head>
 <body>
+    <audio src="{% static 'music/ruleta.mp3'%}" id="audio"></audio>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -47,6 +48,7 @@
             var spinTimeTotal = 0;
 
             var ctx;
+            var audio = document.getElementById("audio");
             document.getElementById("spin").disabled = false;
             document.getElementById("spin").addEventListener("click", spin);
 
@@ -65,82 +67,7 @@
                 ]);
                 return colorMap.get(item);
             }
-                            /*function getColor(item, maxitem) {
-            var phase = 0;
-            var center = 128;
-            var width = 127;
-            var frequency = (Math.PI * 2) / maxitem;
 
-            red = Math.sin(frequency * item + 2 + phase) * width + center;
-            green = Math.sin(frequency * item + 0 + phase) * width + center;
-            blue = Math.sin(frequency * item + 4 + phase) * width + center;
-
-            return RGB2Color(red, green, blue);
-            }*/
-
-   /**         function drawRouletteWheel() {
-    var canvas = document.getElementById("canvas");
-    if (canvas.getContext) {
-        var outsideRadius = 230;
-        var textRadius = 160;
-        var insideRadius = 50;
-
-        ctx = canvas.getContext("2d");
-        ctx.clearRect(0, 0, 500, 500);
-
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-
-        ctx.font = 'bold 25px Helvetica, Arial';
-
-        for (var i = 0; i < options.length; i++) {
-            var angle = startAngle + i * arc;
-            ctx.fillStyle = getColor(i, options.length);
-
-            ctx.beginPath();
-            ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
-            ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
-            ctx.stroke();
-            ctx.fill();
-
-            ctx.save();
-            ctx.shadowOffsetX = -1;
-            ctx.shadowOffsetY = -1;
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = "#27538C";
-            ctx.textBaseline = "middle";
-            ctx.translate(
-                250 + Math.cos(angle + arc / 2) * textRadius,
-                250 + Math.sin(angle + arc / 2) * textRadius
-            );
-            ctx.rotate(angle + arc / 2 + Math.PI / 2);
-            var text = options[i];
-            ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-            ctx.restore();
-        } 
-
-        // Set the center color
-        ctx.fillStyle = "#E49EF1"; // Replace "#FF0000" with the desired color code
-
-        // Draw the center circle
-        ctx.beginPath();
-        ctx.arc(250, 250, 40, 0, 2 * Math.PI);
-        ctx.fill();
-
-        // Draw arrow
-        ctx.fillStyle = "#27538C";
-        ctx.beginPath();
-        ctx.moveTo(250 - 4, 250 - (outsideRadius + 10));
-        ctx.lineTo(250 + 4, 250 - (outsideRadius + 10));
-        ctx.lineTo(250 + 4, 250 - (outsideRadius - 10));
-        ctx.lineTo(250 + 9, 250 - (outsideRadius - 10));
-        ctx.lineTo(250 + 0, 250 - (outsideRadius - 25));
-        ctx.lineTo(250 - 9, 250 - (outsideRadius - 10));
-        ctx.lineTo(250 - 4, 250 - (outsideRadius - 10));
-        ctx.lineTo(250 - 4, 250 - (outsideRadius + 10));
-        ctx.fill();
-    }
-}*/
 
 function drawRouletteWheel() {
     var canvas = document.getElementById("canvas");
@@ -216,9 +143,10 @@ function drawRouletteWheel() {
 
             function spin() {
             document.getElementById("spin").disabled = true;
+            audio.play();
             spinAngleStart = Math.random() * 10 + 10;
             spinTime = 0;
-            spinTimeTotal = 40 * 1000;
+            spinTimeTotal = 60 * 1000;
             rotateWheel();
             }
 
@@ -227,7 +155,8 @@ function drawRouletteWheel() {
             var degrees = (startAngle * 180) / Math.PI + 90;
             var arcd = (arc * 180) / Math.PI;
             var index = Math.floor((360 - (degrees % 360)) / arcd);
-            if ((spinTime > 2500) & (options[index] == "{{cliente.porcentaje}}")) {
+            if ((spinTime > 4000) & (options[index] == "{{cliente.porcentaje}}")) {
+                audio.pause();
                 stopRotateWheel();
                 return;
             }
