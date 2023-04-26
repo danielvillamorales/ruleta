@@ -179,11 +179,15 @@ function drawRouletteWheel() {
             ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
             ctx.restore();
             setTimeout(async function() {
-        Swal.fire(
-            'Felicitaciones!',
-            'Tienes Un Descuento Del ' + text +' En Toda La Compra.',
-            'success'
-        );
+                Swal.fire({
+                    title: 'Felicitaciones!',
+                    text: 'Tienes Un Descuento De: ' + text + ' En Toda La Compra.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(function() {
+                    // Redireccionar a otra página
+                    window.location.href = 'https://sorteo.kostazul.com/';
+                });
             }, 2000);
             }
 
