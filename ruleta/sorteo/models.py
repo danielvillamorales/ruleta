@@ -11,6 +11,7 @@ class Ruleta(models.Model):
     fecha = models.DateField(auto_now_add=True)
     porcentaje = models.CharField(max_length=4, null=True)
     consecutivo = models.IntegerField()
+    terminos = models.BooleanField(default=True)
 
     class Meta:
         unique_together = ('cedula', 'fecha')
