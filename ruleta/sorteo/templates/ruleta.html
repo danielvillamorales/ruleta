@@ -181,16 +181,16 @@ function drawRouletteWheel() {
             setTimeout(async function() {
                 Swal.fire({
                     title: 'Felicitaciones!',
-                    text: 'Tienes Un Descuento De: ' + text + ' En Toda La Compra.',
+                    text: 'Tienes Un Descuento Del ' + text + ' En Toda La Compra.',
                     icon: 'success',
                     confirmButtonText: 'OK',
                     width: window.innerWidth > 768 ? 600 : 310, // Ancho de 600px en pantallas grandes, 300px en pantallas pequeñas
-                    padding: '2rem',
+                    position: window.innerWidth > 768 ? 'center' : 'top',
                 }).then(function() {
                     // Redireccionar a otra página
                     window.location.href = 'https://sorteo.kostazul.com/';
                 });
-            }, 2000);
+            }, 3000);
             }
 
             function easeOut(t, b, c, d) {
