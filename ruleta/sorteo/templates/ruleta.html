@@ -183,7 +183,9 @@ function drawRouletteWheel() {
                     title: 'Felicitaciones!',
                     text: 'Tienes Un Descuento De: ' + text + ' En Toda La Compra.',
                     icon: 'success',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    width: window.innerWidth > 768 ? 600 : 350, // Ancho de 600px en pantallas grandes, 300px en pantallas pequeñas
+                    padding: '2rem',
                 }).then(function() {
                     // Redireccionar a otra página
                     window.location.href = 'https://sorteo.kostazul.com/';
