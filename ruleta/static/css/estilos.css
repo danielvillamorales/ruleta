@@ -15,7 +15,7 @@ body {
 #divform{
     position: absolute;
     top: 25%;
-    left: 55%;
+    left: 50%;
     font-family: anton;
 }
 
@@ -54,8 +54,18 @@ body {
 
 button {
     position: relative;
-    left: 10%;
-    border-radius: 40px;
-    font-size: 18px;
-}   
+    left: 3%;
+    padding: 7px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: 0.1em solid #DADADA;
+}  
+
+button:hover {
+    background-color: #DADADA;
+    color: #3D3D3D;
+    border: 0.1em solid black;
+    cursor: pointer;
+}
+
 
