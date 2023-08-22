@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static  'css/estilos.css' %}?1">
+    <link rel="stylesheet" href="{% static  'css/estilos_ruleta.css' %}?2">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
@@ -18,22 +18,22 @@
 </head>
 <body>
     <audio src="{% static 'music/ruleta.mp3'%}" id="audio"></audio>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h1>¡PRUEBA TU SUERTE!</h1>
-            </div>
-            <div class="col-12">
-                <canvas id="canvas" width="500" height="500"></canvas>
-                <button type="button" class="btn btn-danger" id='spin'>¡GIRAR RULETA!</button>
-            </div>
-            <div class="col-12">
-                <img src="{% static 'img/logo.png' %}" alt="logo" id="logo">
-            </div>
-        </div>
-        
+    <div>
+        <canvas id="canvas" width="440" height="440"></canvas>
+        <button type="button" class="btn btn-danger" id='spin'>¡GIRAR RULETA!</button>
     </div>
-
+    <style>
+        /* Define la fuente @font-face */
+        @font-face {
+          font-family: lemon;
+          src: url('LEMONMILK-Regular.otf');
+        }
+      
+        /* Aplica la fuente a elementos específicos dentro del script */
+        .font-lemon {
+          font-family: lemon; /* Usa 'anton' y, si no está disponible, una fuente sans-serif como respaldo */
+        }
+    </style>
     
 
     <script>
@@ -54,16 +54,16 @@
 
             function getColor(item, maxitem) {
                 const colorMap = new Map([
-                    [0, "#00bfff"],
-                    [1, "#192bc2"],
-                    [2, "#0000ff"],
-                    [3, "#0047ab"],
-                    [4, "#73c2fb"],
-                    [5, "#1e90ff"],
-                    [6, "#1034a6"],
-                    [7, "#89cff0"],
-                    [8, "#1560bd"],
-                    [9, "#0f52ba"],
+                    [0, "#39a1e8"],
+                    [1, "#ca3d77"],
+                    [2, "#fba629"],
+                    [3, "#f3f3e9"],
+                    [4, "#2faf74"],
+                    [5, "#e65051"],
+                    [6, "#39a1e8"],
+                    [7, "#ca3d77"],
+                    [8, "#fba629"],
+                    [9, "#f3f3e9"],
                 ]);
                 return colorMap.get(item);
             }
@@ -72,13 +72,13 @@
 function drawRouletteWheel() {
     var canvas = document.getElementById("canvas");
     if (canvas.getContext) {
-        var outsideRadius = 230;
-        var textRadius = 160;
+        var outsideRadius = 180;
+        var textRadius = 110;
         var insideRadius = 50;
         
         // Modificación: si el ancho de la pantalla es menor a 600 píxeles, se reduce el tamaño de la ruleta
-        if (window.innerWidth < 600) {
-            var scaleRatio = window.innerWidth / 1200;
+        if (window.innerWidth < 1230) {
+            var scaleRatio = window.innerWidth / 1230;
             outsideRadius *= 0.8;
             textRadius *= 0.8;
             insideRadius *= 0.8;
@@ -87,10 +87,6 @@ function drawRouletteWheel() {
         ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, 500, 500);
 
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-
-        ctx.font = 'bold 25px Helvetica, Arial';
 
         for (var i = 0; i < options.length; i++) {
             var angle = startAngle + i * arc;
@@ -106,7 +102,9 @@ function drawRouletteWheel() {
             ctx.shadowOffsetX = -1;
             ctx.shadowOffsetY = -1;
             ctx.shadowBlur = 0;
-            ctx.fillStyle = "#ffffff";
+            ctx.font =  (window.innerWidth < 1230) ? "bold 20px arial" : "bold 28px arial";
+            ctx.fillStyle = (i === 3 || i === 9) ? "#585753" : "#ffffff";
+            
             ctx.textBaseline = "middle";
             ctx.translate(
                 250 + Math.cos(angle + arc / 2) * textRadius,
@@ -117,24 +115,32 @@ function drawRouletteWheel() {
             ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
             ctx.restore();
         }
+        // Crear un gradiente radial dorado
+        var gradient = ctx.createRadialGradient(250, 250, 0, 250, 250, 40);
+        gradient.addColorStop(1, "#BF751E");     // Color en el centro
+        gradient.addColorStop(0.5, "#FFC200");   // Color dorado en el medio
+        gradient.addColorStop(0, "#ffffff"); 
 
-        // Set the center color
-        ctx.fillStyle = "#00004d"; // Replace "#FF0000" with the desired color code
-
+        // Usar el gradiente como relleno en el centro de la ruleta
+        ctx.fillStyle = gradient;
         // Draw the center circle
         ctx.beginPath();
-        ctx.arc(250, 250, 40, 0, 2 * Math.PI);
+        ctx.arc(250, 250,  (window.innerWidth < 1230) ? 30 : 40, 0, 2 * Math.PI);
         ctx.fill();
 
+        var gradient = ctx.createRadialGradient(250, 250, 0, 250, 250, 40);
+        gradient.addColorStop(1, "#BF751E");     // Color en el centro
+        gradient.addColorStop(0.5, "#FFC200");   // Color dorado en el medio
+        gradient.addColorStop(0, "#ffffff"); 
         // Draw arrow
-        ctx.fillStyle = "#00004d";
+        ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.moveTo(250 - 4, 250 - (outsideRadius + 10));
         ctx.lineTo(250 + 4, 250 - (outsideRadius + 10));
         ctx.lineTo(250 + 4, 250 - (outsideRadius - 10));
-        ctx.lineTo(250 + 9, 250 - (outsideRadius - 10));
-        ctx.lineTo(250 + 0, 250 - (outsideRadius - 25));
-        ctx.lineTo(250 - 9, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 + 10, 250 - (outsideRadius - 10));
+        ctx.lineTo(250 + 0, 250 - (outsideRadius - 35));
+        ctx.lineTo(250 - 10, 250 - (outsideRadius - 10));
         ctx.lineTo(250 - 4, 250 - (outsideRadius - 10));
         ctx.lineTo(250 - 4, 250 - (outsideRadius + 10));
         ctx.fill();

@@ -1,86 +1,61 @@
 @font-face {
-    font-family: grobold;
-    src: url('GROBOLD.ttf');
-  }
+    font-family: anton;
+    src: url('Antonio-Ligth.ttf');}
 
 
-  body {
+body {
     background-image: url("../img/fondo.jpg") ;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     position: relative;
-    height:100vh;
-  }
+    height:100vh;}
 
-  .h1registro{
-    color: rgb(45, 45, 45);
-    opacity: 0.9;
-  }
-  
-div {
-    text-align: center;
+#divform{
+    position: absolute;
+    top: 25%;
+    left: 55%;
+    font-family: anton;
+}
+
+.spanform {
+    width: 9em;
+    border: 0.1em solid #F6F6F6;
+    background-color: #DADADA;
+    color: #3D3D3D;
+    display: flex ;
     align-items: center;
+    justify-items: center;
+    padding-left: 5px;
+}
+
+
+
+.inputform {
+    width: 25em;
+    height: 15px;
+    border: 0.1em solid #DADADA;
+    background-color: #F6F6F6;
+    padding-left: 3%;
+    padding-right: 3%;
+    font-size: 14px;
+    height: 3em;
+    opacity: 0.8;
+}
+
+.inputround {
+    border-top-right-radius: 20px;
+}
+
+.inputround2{
+    border-bottom-right-radius: 20px;
 }
 
 button {
     position: relative;
-    text-align: center;
-    align-items: center;
-    font-family: grobold;
-    top: 10%;
-    left: -15em;
-}
+    left: 10%;
+    border-radius: 40px;
+    font-size: 18px;
+}   
 
-canvas {
-    position: relative;
-    left: 5em;
-    top: 10px;
-}
-
-h1 {
-    font-family: grobold;
-    position: relative;
-    font-size: 50px;
-    color: rgb(0, 10, 97);
-}
-
-#logo {
-    position: relative;
-    top: 2em;
-    width: 150px;
-}
-
-@media (min-width: 0px) and (max-width: 550px) { 
-   div {
-        position: relative;
-        text-align: center;
-        align-items: center;
-        top:5%;
-   }
-    button {
-        text-align: center;
-        align-items: center;
-        left: 0;
-        font-family: grobold;
-        top:20%;
-    }
-
-    canvas {
-        position: relative;
-        left: -4em;
-        top: 10px;
-    }
-
-    h1 {
-        align-items: center;
-        align-content: center;
-        text-align: center;
-        position: relative;
-        font-size: 35px;
-        top: 1%;
-        color: rgb(0, 10, 97);
-    }
-
-}

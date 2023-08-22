@@ -1,0 +1,46 @@
+@font-face {
+    font-family: anton;
+    src: url('Antonio-Ligth.ttf');}
+
+
+body {
+    background-image: url("../img/fondoruleta.jpg") ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    height:100vh;}
+
+
+canvas {
+    position: absolute;
+    top: 17%;
+    left: 15%;
+    opacity: 0.9;
+}
+
+
+button {
+    position: absolute;
+    top: 15%;
+    left: 27%;
+    opacity: 0.9;
+}
+
+@media (min-width: 0px) and (max-width: 1230px) { 
+
+    canvas {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        opacity: 0.9;
+    }
+
+    button {
+        position: absolute;
+        top: 8%;
+        left: 23%;
+    }
+}
+
