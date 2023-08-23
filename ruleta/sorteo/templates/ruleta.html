@@ -26,18 +26,23 @@
         /* Define la fuente @font-face */
         @font-face {
           font-family: lemon;
-          src: url('LEMONMILK-Regular.otf');
+          src: url('Antonio-Bold.ttf');
         }
       
         /* Aplica la fuente a elementos específicos dentro del script */
         .font-lemon {
-          font-family: lemon; /* Usa 'anton' y, si no está disponible, una fuente sans-serif como respaldo */
+          font-family: lemon; 
+          background-color: #00388d;
+          color: white;
+          font-size: 25px;
+          padding: 10px;
+          border-radius: 20px;
         }
     </style>
     
 
     <script>
-            var options = ["5%", "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%"];
+            var options = ["15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%"];
 
             var startAngle = 0;
             var arc = Math.PI / (options.length / 2);
@@ -186,12 +191,20 @@ function drawRouletteWheel() {
             ctx.restore();
             setTimeout(async function() {
                 Swal.fire({
-                    title: 'Felicitaciones!',
-                    text: 'Tienes Un Descuento Del ' + text + ' En Toda La Compra.',
-                    icon: 'success',
-                    confirmButtonText: 'OK',
+                    title: 'FELICITACIONES!',
+                    html: '<h3 class="font-lemon">¡GANASTE! '+ text +' EN TODA LA COMPRA.</h3>',
+                    icon: 'success',        
                     width: window.innerWidth > 768 ? 600 : 310, // Ancho de 600px en pantallas grandes, 300px en pantallas pequeñas
-                    position: window.innerWidth > 768 ? 'center' : 'top',
+                    position: 'center',
+                    padding: '3em',
+                    color: '#3D3D3D',
+                    background: '#DEE5F3',
+                    backdrop: `
+                        rgba(0,7,41,0.6)
+                        url("{% static 'img/fuegos.gif'%}")
+                        left top
+                        repeat
+                    `
                 }).then(function() {
                     // Redireccionar a otra página
                     window.location.href = 'https://sorteo.kostazul.com/';
