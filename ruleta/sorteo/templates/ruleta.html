@@ -82,8 +82,8 @@ function drawRouletteWheel() {
         var insideRadius = 50;
         
         // Modificación: si el ancho de la pantalla es menor a 600 píxeles, se reduce el tamaño de la ruleta
-        if (window.innerWidth < 1230) {
-            var scaleRatio = window.innerWidth / 1230;
+        if (window.innerWidth < 13000) {
+            var scaleRatio = window.innerWidth / 1300;
             outsideRadius *= 0.8;
             textRadius *= 0.8;
             insideRadius *= 0.8;
@@ -107,7 +107,7 @@ function drawRouletteWheel() {
             ctx.shadowOffsetX = -1;
             ctx.shadowOffsetY = -1;
             ctx.shadowBlur = 0;
-            ctx.font =  (window.innerWidth < 1230) ? "bold 20px arial" : "bold 28px arial";
+            ctx.font =  (window.innerWidth < 1300) ? "bold 20px arial" : "bold 28px arial";
             ctx.fillStyle = (i === 3 || i === 9) ? "#585753" : "#ffffff";
             
             ctx.textBaseline = "middle";
@@ -130,7 +130,7 @@ function drawRouletteWheel() {
         ctx.fillStyle = gradient;
         // Draw the center circle
         ctx.beginPath();
-        ctx.arc(250, 250,  (window.innerWidth < 1230) ? 30 : 40, 0, 2 * Math.PI);
+        ctx.arc(250, 250,  (window.innerWidth < 1300) ? 30 : 40, 0, 2 * Math.PI);
         ctx.fill();
 
         var gradient = ctx.createRadialGradient(250, 250, 0, 250, 250, 40);
@@ -194,7 +194,7 @@ function drawRouletteWheel() {
                     title: 'FELICITACIONES!',
                     html: '<h3 class="font-lemon">¡GANASTE! '+ text +' EN TODA LA COMPRA.</h3>',
                     icon: 'success',        
-                    width: window.innerWidth > 768 ? 600 : 310, // Ancho de 600px en pantallas grandes, 300px en pantallas pequeñas
+                    width: window.innerWidth > 1300 ? 600 : 400, // Ancho de 600px en pantallas grandes, 300px en pantallas pequeñas
                     position: 'center',
                     padding: '3em',
                     color: '#3D3D3D',
