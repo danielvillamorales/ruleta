@@ -15,9 +15,9 @@ body {
 
 canvas {
     position: absolute;
-    top: 17%;
+    top: 26%;
     left: 15%;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 
@@ -25,22 +25,21 @@ button {
     position: absolute;
     top: 15%;
     left: 27%;
-    opacity: 0.9;
+    background-color: #e65051;
 }
 
 @media (min-width: 0px) and (max-width: 1230px) { 
 
     canvas {
         position: absolute;
-        top: 5%;
+        top: 2%;
         left: 5%;
-        opacity: 0.9;
     }
 
     button {
         position: absolute;
         top: 8%;
-        left: 23%;
+        left: 25%;
     }
 }
 
