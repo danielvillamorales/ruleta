@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from sorteo.views import ruleta , registro
+from sorteo.views import ruleta , registro, consultar_ganador
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ruleta/<int:pk>', ruleta, name='ruleta'),
     path('', registro, name='registro'),
+    path('consultar_ganador/', consultar_ganador, name='consultar_ganador'),
 ]

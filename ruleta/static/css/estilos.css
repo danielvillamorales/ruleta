@@ -10,13 +10,27 @@ body {
     background-size: cover;
     background-attachment: fixed;
     position: relative;
-    height:100vh;}
+    height:100vh;
+    width: 100%;
+}
 
 #divform{
-    position: absolute;
-    top: 25%;
-    left: 50%;
+        position: absolute;
+        top: 25%;
+        left: 55%;
+        font-family: anton;
+    }
+
+#divconsulta{
+    position: relative;
+    top: 15em;
     font-family: anton;
+}
+
+.pganador{
+    font-size: 50px;
+    color: #3D3D3D;
+    text-align: center;
 }
 
 .spanform {
@@ -26,7 +40,7 @@ body {
     color: #3D3D3D;
     display: flex ;
     align-items: center;
-    justify-items: center;
+    justify-items: center;  
     padding-left: 5px;
 }
 
@@ -41,7 +55,7 @@ body {
     padding-right: 3%;
     font-size: 14px;
     height: 3em;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .inputround {
@@ -55,8 +69,8 @@ body {
 button {
     position: relative;
     left: 3%;
-    padding: 7px;
-    font-size: 14px;
+    padding: 5px;
+    font-size: 12px;
     border-radius: 20px;
     border: 0.1em solid #DADADA;
 }  
@@ -69,3 +83,80 @@ button:hover {
 }
 
 
+@media (min-width: 768px) and (max-width: 1230px) { 
+    #divform{
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        font-family: anton;
+    }
+
+    span{
+        font-size: 10px;
+    }
+    .spanform {
+        width: 7em;
+        border: 0.1em solid #F6F6F6;
+        background-color: #DADADA;
+        color: #3D3D3D;
+        display: flex ;
+        align-items: center;
+        justify-items: center;  
+        padding-left: 5px;
+        font-size: 11px;
+    }
+    
+    
+    
+    .inputform {
+        width: 18em;
+        height: 12px;
+        border: 0.1em solid #DADADA;
+        background-color: #F6F6F6;
+        padding-left: 3%;
+        padding-right: 3%;
+        font-size: 11px;
+        height: 3em;
+        opacity: 0.9;
+    }    
+
+}
+
+@media (min-width: 0px) and (max-width: 768px) { 
+    #divform{
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        font-family: anton;
+    }
+
+    span{
+        font-size: 9px;
+    }
+    .spanform {
+        width: 7em;
+        border: 0.1em solid #F6F6F6;
+        background-color: #DADADA;
+        color: #3D3D3D;
+        display: flex ;
+        align-items: center;
+        justify-items: center;  
+        padding-left: 5px;
+        font-size: 11px;
+    }
+    
+    
+    
+    .inputform {
+        width: 18em;
+        height: 12px;
+        border: 0.1em solid #DADADA;
+        background-color: #F6F6F6;
+        padding-left: 3%;
+        padding-right: 3%;
+        font-size: 11px;
+        height: 3em;
+        opacity: 0.9;
+    }    
+
+}

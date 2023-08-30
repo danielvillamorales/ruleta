@@ -12,27 +12,41 @@ body {
     position: relative;
     height:100vh;}
 
-
 canvas {
     position: absolute;
-    top: 26%;
+    top: 25%;
     left: 15%;
     opacity: 0.95;
-}
-
+    }
 
 button {
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 27%;
     background-color: #e65051;
-}
+    }
+    
 
-@media (min-width: 0px) and (max-width: 1230px) { 
 
+@media (min-width: 981px) and (max-width: 1366px) { 
     canvas {
         position: absolute;
-        top: 2%;
+        top: 20%;
+        left: 10%;
+    }
+
+    button {
+        position: absolute;
+        top: 10%;
+        left: 25%;
+    }
+}
+
+
+@media (min-width: 0px) and (max-width: 980px) { 
+    canvas {
+        position: absolute;
+        top: 1%;
         left: 5%;
     }
 
@@ -42,4 +56,7 @@ button {
         left: 25%;
     }
 }
+
+
+
 

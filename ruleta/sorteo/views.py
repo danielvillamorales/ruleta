@@ -56,3 +56,17 @@ def registro(request):
                 cliente.save()
                 return redirect('ruleta', cliente.id)
     return render(request , 'registro.html')
+
+
+def consultar_ganador(request):
+    if request.method == 'POST':
+        cedula = request.POST.get('cedula')
+        try:
+            cliente_obj = Ruleta.objects.get(cedula=cedula, fecha=date.today())
+            if cliente_obj:
+                return render(request, 'consultac.html', {'cliente' : cliente_obj})
+        except:
+            messages.error(request, 'No se ha encontrado un ganador con esa cédula el dia de hoy')
+            return redirect('consultar_ganador')
+
+    return render(request, 'consultac.html')

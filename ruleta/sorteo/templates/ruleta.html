@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static  'css/estilos_ruleta.css' %}?5">
+    <link rel="stylesheet" href="{% static  'css/estilos_ruleta.css' %}?9">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
@@ -83,18 +83,29 @@ function drawRouletteWheel() {
         var textRadius = 165;
         var insideRadius = 60;
 
-        if (window.innerWidth < 1450) {
+        if (window.innerWidth < 1450 || window.innerHeight < 708) {
             var scaleRatio = window.innerWidth / 1450;
+            canvas.width = 450;
+            canvas.height = 450;
             outsideRadius *= 0.8;
             textRadius *= 0.8;
             insideRadius *= 0.8;
         }
-        
+
+        if (window.innerWidth < 1368) {
+            var scaleRatio = window.innerWidth / 1366;
+            outsideRadius *= 0.8;
+            textRadius *= 0.8;
+            insideRadius *= 0.8;
+        }
+
         // Modificación: si el ancho de la pantalla es menor a 600 píxeles, se reduce el tamaño de la ruleta
-        if (window.innerWidth < 1200) {
+        if (window.innerWidth < 1200 ) {
             var scaleRatio = window.innerWidth / 1200;
-            outsideRadius *= 0.6;
-            textRadius *= 0.6;
+            canvas.width = 360;
+            canvas.height = 360;
+            outsideRadius *= 0.7;
+            textRadius *= 0.7;
             insideRadius *= 0.8;
         }
 
@@ -139,7 +150,7 @@ function drawRouletteWheel() {
         ctx.fillStyle = gradient;
         // Draw the center circle
         ctx.beginPath();
-        ctx.arc(250, 250,  (window.innerWidth < 1300) ? 30 : 40, 0, 2 * Math.PI);
+        ctx.arc(250, 250,  (window.innerWidth < 1230) ? 25 : 40, 0, 2 * Math.PI);
         ctx.fill();
 
         var gradient = ctx.createRadialGradient(250, 250, 0, 250, 250, 40);
@@ -201,9 +212,9 @@ function drawRouletteWheel() {
             setTimeout(async function() {
                 Swal.fire({
                     title: 'FELICITACIONES!',
-                    html: '<h3 class="font-lemon">¡GANASTE! '+ text +' EN TODA LA COMPRA.</h3>',
+                    html: '<h3 class="font-lemon">¡GANASTE! '+ text +' EN PRODUCTOS KOSTA AZUL.</h3>',
                     icon: 'success',        
-                    width: window.innerWidth > 1300 ? 600 : 400, // Ancho de 600px en pantallas grandes, 300px en pantallas pequeñas
+                    width: window.innerWidth > 1300 ? 600 : 300, // Ancho de 600px en pantallas grandes, 300px en pantallas pequeñas
                     position: 'center',
                     padding: '3em',
                     color: '#3D3D3D',
