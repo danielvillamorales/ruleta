@@ -19,7 +19,7 @@ canvas {
     opacity: 0.95;
     }
 
-button {
+.buttongirar {
     position: absolute;
     top: 10%;
     left: 27%;
@@ -27,6 +27,12 @@ button {
     }
     
 
+.swal2-styled{
+    font-size: 12px;
+    padding: 2px;
+    background-color: black;
+    color: aliceblue;
+}
 
 @media (min-width: 981px) and (max-width: 1366px) { 
     canvas {
@@ -35,7 +41,7 @@ button {
         left: 10%;
     }
 
-    button {
+    .buttongirar {
         position: absolute;
         top: 10%;
         left: 25%;
@@ -43,19 +49,38 @@ button {
 }
 
 
-@media (min-width: 0px) and (max-width: 980px) { 
+@media (min-width: 541px) and (max-width: 980px) { 
     canvas {
         position: absolute;
         top: 1%;
         left: 5%;
     }
 
-    button {
+    .buttongirar {
         position: absolute;
         top: 8%;
         left: 25%;
     }
 }
+
+@media (min-width: 0px) and (max-width: 540px) {
+
+    canvas {
+        position: absolute;
+        top: 3%;
+        left: -10%;
+    }
+
+    .buttongirar {
+        position: absolute;
+        top: 8%;
+        left: 35%;
+    }
+
+    body {
+        background-image: url("../img/fondoruleta_mobile.jpg") ;
+    }
+ }
 
 
 

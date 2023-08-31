@@ -23,14 +23,20 @@ body {
 
 #divconsulta{
     position: relative;
-    top: 15em;
+    top: 12em;
     font-family: anton;
 }
 
+.divinfo{
+    background-color: #F6F6F6;
+    opacity: 0.9;
+    border-radius: 20px;
+}
+
 .pganador{
-    font-size: 50px;
+    font-size: 20px;
     color: #3D3D3D;
-    text-align: center;
+    text-align: left;
 }
 
 .spanform {
@@ -86,7 +92,7 @@ button:hover {
 @media (min-width: 768px) and (max-width: 1230px) { 
     #divform{
         position: absolute;
-        top: 15%;
+        top: 12%;
         left: 50%;
         font-family: anton;
     }
@@ -109,7 +115,7 @@ button:hover {
     
     
     .inputform {
-        width: 18em;
+        width: 15em;
         height: 12px;
         border: 0.1em solid #DADADA;
         background-color: #F6F6F6;
@@ -122,7 +128,56 @@ button:hover {
 
 }
 
-@media (min-width: 0px) and (max-width: 768px) { 
+@media (min-width: 0px) and (max-width: 540px){
+    body {
+        background-image: url("../img/fondo_mobile.jpg") ;
+    }
+
+    #divform{
+        position: absolute;
+        top: 40%;
+        left: 1%;
+        font-family: anton;
+    }
+
+    .inputform {
+        width: 25em;
+        height: 9px;
+        border: 0.1em solid #DADADA;
+        background-color: #F6F6F6;
+        padding-left: 3%;
+        padding-right: 3%;
+        font-size: 11px;
+        height: 2.5em;
+        opacity: 0.9;
+    }
+
+    .spanform {
+        width: 7em;
+        border: 0.1em solid #F6F6F6;
+        background-color: #DADADA;
+        color: #3D3D3D;
+        display: flex ;
+        align-items: center;
+        justify-items: center;  
+        padding-left: 5px;
+        font-size: 8px;
+    }
+
+    span{
+        font-size: 9px;
+    }
+
+    button {
+        position: relative;
+        left: 1%;
+        padding: 4px;
+        font-size: 9px;
+    }  
+
+}
+
+@media (min-width: 541px) and (max-width: 768px) { 
     #divform{
         position: absolute;
         top: 10%;
