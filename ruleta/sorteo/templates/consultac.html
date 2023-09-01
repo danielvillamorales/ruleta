@@ -20,6 +20,7 @@
    <div class="container-fluid">
     <div class="row">
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
             {% if messages %}
             {% for message in messages %}
             <ul >
@@ -29,8 +30,9 @@
             {% endfor %}
         
         {% endif %}
+        <a class="btn btn-outline-success" href="{% url 'exportar_sorteos' %}">Exportar</a>
         </div>
-
+        
         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12"></div>
         <div  id="divconsulta" class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
             <form method="post" enctype="multipart/form-data">

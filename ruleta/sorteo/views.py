@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from sorteo.models import Ruleta
 from sorteo.forms import RuletaForm
+from django.http import HttpResponse
 from django.urls import reverse
 from datetime import date
 from django.contrib import messages
+from io import BytesIO
+import xlwt
 
 valor_premio = {1:'30%',
                 2:'15%',
@@ -70,3 +73,26 @@ def consultar_ganador(request):
             return redirect('consultar_ganador')
 
     return render(request, 'consultac.html')
+
+
+def exportar_sorteos(request):
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Sorteos')
+    font_style = xlwt.XFStyle()
+    columns = ['id','cedula','nombre','fecha_nacimeinto','correo','fecha_digitado','porcetaje','consecutivo','telefono']
+    row_num = 0
+    [ws.write(row_num, col_num, column, font_style) for col_num, column in enumerate(columns)]
+    rows = Ruleta.objects.all().values_list('id','cedula','nombre','fecha_nacimiento','correo','fecha','porcentaje','consecutivo','telefono')
+    for row_num, row in enumerate(rows, start=1):
+        for col_num, cell in enumerate(row):
+            if isinstance(cell, date):
+                ws.write(row_num, col_num, cell.strftime('%Y-%m-%d'), font_style)
+            else:
+                ws.write(row_num, col_num, cell, font_style)
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=Sorteos.xls'
+    output = BytesIO()
+    wb.save(output)
+    output.seek(0)
+    response.write(output.getvalue())
+    return response
