@@ -24,7 +24,7 @@ class Ruleta(models.Model):
         try:
             last_record = Ruleta.objects.latest('id')
             # Reiniciar el consecutivo si es mayor que 20 o si no hay registros en la tabla Ruleta
-            if last_record.consecutivo >= 25:
+            if last_record.consecutivo >= 50:
                 return 1
             else:
                 return last_record.consecutivo + 1
