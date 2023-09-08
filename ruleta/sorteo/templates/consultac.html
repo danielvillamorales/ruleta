@@ -39,13 +39,14 @@
                 {% csrf_token %}
               
                   <div class="input-group mb-3">
-                      <span  id="inputGroup-sizing-default" class="spanform" for="id_cedula" >Cedula:</span>
-                      <input required type="number" class="form-control" name="cedula">
+                      <span  id="inputGroup-sizing-default" class="spanform" for="id_cedula" >Cedula o Nombre:</span>
+                      <input required type="text" class="form-control" name="cedula">
                       <div class="input-group-prepend">
                         <button class="btn btn-outline-secondary" type="submit">Consultar</button>
                       </div>
                   </div>
             </form>
+            {% for cliente in clientes %}
             <div class="divinfo">
                 <p class="pganador">Cedula:{{cliente.cedula}}</p>
                 <p class="pganador">Nombre: {{cliente.nombre}}</p>
@@ -53,6 +54,7 @@
                 <p class="pganador">Correo: {{cliente.correo}}</p>
                 <p class="pganador">Descuento: {{cliente.porcentaje}}</p>
             </div>
+            {% endfor %}
         </div>
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from sorteo.models import Ruleta
 from sorteo.forms import RuletaForm
 from django.http import HttpResponse
+from django.db.models import Q
 from django.urls import reverse
 from datetime import date
 from django.contrib import messages
@@ -91,9 +92,9 @@ def consultar_ganador(request):
     if request.method == 'POST':
         cedula = request.POST.get('cedula')
         try:
-            cliente_obj = Ruleta.objects.get(cedula=cedula, fecha=date.today())
-            if cliente_obj:
-                return render(request, 'consultac.html', {'cliente' : cliente_obj})
+            cliente_obj = Ruleta.objects.filter(Q(cedula=cedula) | Q(nombre__icontains=cedula), fecha=date.today())
+            if len(cliente_obj)>0:
+                return render(request, 'consultac.html', {'clientes' : cliente_obj})
         except:
             messages.error(request, 'No se ha encontrado un ganador con esa cédula el dia de hoy')
             return redirect('consultar_ganador')
