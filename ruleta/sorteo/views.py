@@ -91,14 +91,12 @@ def registro(request):
 def consultar_ganador(request):
     if request.method == 'POST':
         cedula = request.POST.get('cedula')
-        try:
-            cliente_obj = Ruleta.objects.filter(Q(cedula=cedula) | Q(nombre__icontains=cedula), fecha=date.today())
-            if len(cliente_obj)>0:
-                return render(request, 'consultac.html', {'clientes' : cliente_obj})
-        except:
+        cliente_obj = Ruleta.objects.filter(Q(cedula=cedula) | Q(nombre__icontains=cedula), fecha=date.today())
+        if len(cliente_obj)>0:
+            return render(request, 'consultac.html', {'clientes' : cliente_obj})
+        else:
             messages.error(request, 'No se ha encontrado un ganador con esa cédula el dia de hoy')
             return redirect('consultar_ganador')
-
     return render(request, 'consultac.html')
 
 
