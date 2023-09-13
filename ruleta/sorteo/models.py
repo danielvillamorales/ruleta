@@ -32,7 +32,9 @@ class Ruleta(models.Model):
             last_record = Ruleta.objects.latest('id')
             last_fecha = DiasFecha.objects.filter(fecha=date.today())
             # Reiniciar el consecutivo si es mayor que 20 o si no hay registros en la tabla Ruleta
-            if last_record.consecutivo >= 80 if len(last_fecha) > 0 else 50:
+            valor = 80 if len(last_fecha) > 0 else 50
+            print(valor)
+            if last_record.consecutivo >= valor:
                 return 1
             else:
                 return last_record.consecutivo + 1
