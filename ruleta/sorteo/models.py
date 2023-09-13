@@ -1,5 +1,12 @@
 from django.db import models
 from django.db.models import Max
+from datetime import date
+
+class DiasFecha(models.Model):
+    fecha = models.DateField(null=False)
+
+    def __str__(self):
+        return f'{self.fecha}'
 
 # Create your models here.
 class Ruleta(models.Model):
@@ -23,8 +30,9 @@ class Ruleta(models.Model):
         # Obtener el último registro agregado a la tabla Ruleta
         try:
             last_record = Ruleta.objects.latest('id')
+            last_fecha = DiasFecha.objects.filter(fecha=date.today())
             # Reiniciar el consecutivo si es mayor que 20 o si no hay registros en la tabla Ruleta
-            if last_record.consecutivo >= 50:
+            if last_record.consecutivo >= 80 if len(last_fecha) > 0 else 50:
                 return 1
             else:
                 return last_record.consecutivo + 1

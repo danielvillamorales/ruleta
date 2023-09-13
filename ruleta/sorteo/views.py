@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from sorteo.models import Ruleta
+from sorteo.models import Ruleta , DiasFecha
 from sorteo.forms import RuletaForm
 from django.http import HttpResponse
 from django.db.models import Q
@@ -60,12 +60,95 @@ valor_premio = {1:'30%',
                 49:'45%',
                 50:'50%',}
 
+valor_premio2 = {1:'45%',
+                2:'40%',
+                3:'40%',
+                4:'40%',
+                5:'40%',
+                6:'40%',
+                7:'40%',
+                8:'40%',
+                9:'45%',
+                10:'40%',
+                11:'40%',
+                12:'40%',
+                13:'40%',
+                14:'40%',
+                15:'40%',
+                16:'40%',
+                17:'40%',
+                18:'40%',
+                19:'40%',
+                20:'40%',
+                21:'45%',
+                22:'40%',
+                23:'40%',
+                24:'40%',
+                25:'40%',
+                26:'40%',
+                27:'40%',
+                28:'40%',
+                29:'40%',
+                30:'40%',
+                31:'40%',
+                32:'40%',
+                33:'40%',
+                34:'40%',
+                35:'40%',
+                36:'40%',
+                37:'40%',
+                38:'40%',
+                39:'40%',
+                40:'40%',
+                41:'40%',
+                42:'40%',
+                43:'40%',
+                44:'40%',
+                45:'40%',
+                46:'40%',
+                47:'40%',
+                48:'40%',                
+                49:'40%',
+                50:'45%',
+                51:'40%',
+                52:'40%',
+                53:'40%',
+                54:'40%',
+                55:'40%',
+                56:'40%',
+                57:'40%',
+                58:'40%',
+                59:'40%',
+                60:'40%',
+                61:'40%',
+                62:'40%',
+                63:'40%',
+                64:'40%',
+                65:'40%',
+                66:'40%',
+                67:'40%',
+                68:'40%',
+                69:'40%',
+                70:'45%',
+                71:'40%',
+                72:'40%',
+                73:'40%',
+                74:'40%',
+                75:'40%',
+                76:'40%',
+                77:'40%',
+                78:'40%',
+                79:'45%',
+                80:'50%',}
+
 # Create your views here.
 def ruleta(request, pk):
     print(pk)
     cliente = get_object_or_404(Ruleta, pk=pk)
+    fecha_promo = DiasFecha.objects.filter(fecha=date.today())
+    es_promo = 1 if len(fecha_promo) > 0 else 0
     print(cliente)
-    return render(request, 'ruleta.html', {'cliente' : cliente})
+    return render(request, 'ruleta.html', {'cliente' : cliente, 'es_promo': es_promo})
 
 
 def registro(request):
@@ -78,10 +161,10 @@ def registro(request):
                     messages.error(request, 'Ya se ha registrado un usuario con esa cédula el dia de hoy')
                     return redirect('registro')
             except:
+                fecha_promo = DiasFecha.objects.filter(fecha=date.today())
                 cliente = form.save(commit=False)
                 cliente.consecutivo = cliente.get_next_consecutivo()
-                cliente.consecutivo = 50 if cliente.cedula == '5925408' else cliente.consecutivo
-                cliente.porcentaje = valor_premio[cliente.consecutivo]
+                cliente.porcentaje = valor_premio2[cliente.consecutivo] if len(fecha_promo) > 0 else  valor_premio[cliente.consecutivo]
                 print(cliente)
                 cliente.save()
                 return redirect('ruleta', cliente.id)
